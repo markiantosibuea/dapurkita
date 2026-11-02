@@ -19,3 +19,5 @@
 .checkout-error{color:#b42318;font-size:11px;margin:0;min-height:0}
 .checkout-error:empty{display:none}
 @media(max-width:520px){.checkout-card{padding:25px 20px}.checkout-card h2{font-size:27px}}
+
+.product-actions{display:flex;gap:8px;align-items:center;margin-top:15px}.product-actions .add-button{margin-top:0;flex:1}.buy-button{border:0;background:var(--orange);color:#fff;border-radius:99px;padding:10px 13px;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap}.buy-button:hover{background:var(--orange-dark)}@media(max-width:650px){.product-actions{gap:6px}.product-actions .add-button,.buy-button{font-size:9px;padding:9px 10px}}
