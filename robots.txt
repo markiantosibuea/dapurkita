@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://markiantosibuea.github.io/dapurkita/sitemap.xml
