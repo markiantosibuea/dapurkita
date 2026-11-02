@@ -52,14 +52,14 @@ function renderCart(){
 function openCart(){cartPanel.classList.add("open");overlay.classList.add("visible");cartPanel.setAttribute("aria-hidden","false");}
 function closeCart(){cartPanel.classList.remove("open");overlay.classList.remove("visible");cartPanel.setAttribute("aria-hidden","true");}
 function openWhatsApp(message){
-  if(!/^\\d{9,15}$/.test(NOMOR_WA_TOKO)){notify("Nomor WhatsApp toko belum diatur.");return;}
+  if(!/^\d{9,15}$/.test(NOMOR_WA_TOKO)){notify("Nomor WhatsApp toko belum diatur.");return;}
   const url="https://wa.me/"+NOMOR_WA_TOKO+"?text="+encodeURIComponent(message);
   window.location.assign(url);
 }
 function buyNow(id){
   const p=products.find(item=>item.id===id);
   if(!p)return;
-  const message=["Halo DapurKita! Saya ingin membeli produk berikut:","",`• ${p.name} x1 — ${rupiah(p.price)}`,`Total sementara: ${rupiah(p.price)}`,"Mohon konfirmasi ketersediaan dan ongkos kirim. Terima kasih!"].join("\\n");
+  const message=["Halo DapurKita! Saya ingin membeli produk berikut:","",`• ${p.name} x1 — ${rupiah(p.price)}`,`Total sementara: ${rupiah(p.price)}`,"Mohon konfirmasi ketersediaan dan ongkos kirim. Terima kasih!"].join("\n");
   openWhatsApp(message);
 }
 function checkout(){
