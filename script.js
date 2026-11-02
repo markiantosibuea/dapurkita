@@ -1,5 +1,5 @@
 // Nomor WhatsApp toko: isi dengan nomor aktif format internasional tanpa tanda + atau spasi.
-const NOMOR_WA_TOKO = "";
+const NOMOR_WA_TOKO = "6281244910233";
 
 const products = [
   {id:1,name:"Rice Bowl Ayam",category:"Makanan",price:22000,tag:"Favorit",description:"Ayam gurih dengan nasi hangat dan sayuran.",image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=85"},
