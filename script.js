@@ -13,7 +13,7 @@ const products = [
   {id:9,name:"Kentang Goreng",category:"Camilan",price:14000,tag:"Teman santai",description:"Kentang goreng renyah dengan taburan bumbu.",image:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85"},
   {id:10,name:"Ramen Kuah",category:"Makanan",price:32000,tag:"Hangat & lezat",description:"Mi ramen dengan kuah gurih dan topping.",image:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85"},
   {id:11,name:"Pancake Madu",category:"Dessert",price:23000,tag:"Sweet treat",description:"Pancake lembut dengan madu dan buah segar.",image:"https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=800&q=85"},
-  {id:12,name:"Iced Lemon Tea",category:"Minuman",price:12000,tag:"Menyegarkan",description:"Teh dingin dengan lemon yang menyegarkan.",image:"https://images.unsplash.com/photo-1513558161293-c2027e4a2b5b?auto=format&fit=crop&w=800&q=85"}
+  {id:12,name:"Iced Lemon Tea",category:"Minuman",price:12000,tag:"Menyegarkan",description:"Teh dingin dengan lemon yang menyegarkan.",image:"https://raw.githubusercontent.com/markiantosibuea/dapurkita/main/images/iced-lemon-tea.jpg"}
 ];
 
 const rupiah = value => new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(value);
