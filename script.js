@@ -2,12 +2,18 @@
 const NOMOR_WA_TOKO = "";
 
 const products = [
-  {id:1,name:"Rice Bowl Ayam",category:"Makanan",price:22000,tag:"Favorit",description:"Ayam gurih dengan nasi hangat dan sayuran.",image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80"},
-  {id:2,name:"Dimsum Mentai",category:"Camilan",price:25000,tag:"Best seller",description:"Dimsum lembut dengan saus mentai creamy.",image:"https://images.unsplash.com/photo-156324包?auto=format&fit=crop&w=800&q=80"},
-  {id:3,name:"Es Kopi Susu",category:"Minuman",price:18000,tag:"Segar",description:"Perpaduan kopi, susu, dan gula aren.",image:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80"},
-  {id:4,name:"Pasta Creamy",category:"Makanan",price:28000,tag:"Pilihan chef",description:"Pasta dengan saus creamy yang kaya rasa.",image:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80"},
-  {id:5,name:"Brownies Cokelat",category:"Camilan",price:16000,tag:"Manisnya pas",description:"Brownies cokelat lembut untuk teman santai.",image:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80"},
-  {id:6,name:"Jus Buah Segar",category:"Minuman",price:15000,tag:"Fresh",description:"Minuman buah segar untuk hari yang cerah.",image:"https://images.unsplash.com/photo-果汁?auto=format&fit=crop&w=800&q=80"}
+  {id:1,name:"Rice Bowl Ayam",category:"Makanan",price:22000,tag:"Favorit",description:"Ayam gurih dengan nasi hangat dan sayuran.",image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=85"},
+  {id:2,name:"Dimsum Mentai",category:"Camilan",price:25000,tag:"Best seller",description:"Dimsum lembut dengan saus mentai creamy.",image:"https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=85"},
+  {id:3,name:"Es Kopi Susu",category:"Minuman",price:18000,tag:"Segar",description:"Perpaduan kopi, susu, dan gula aren.",image:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=85"},
+  {id:4,name:"Pasta Creamy",category:"Makanan",price:28000,tag:"Pilihan chef",description:"Pasta dengan saus creamy yang kaya rasa.",image:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=85"},
+  {id:5,name:"Brownies Cokelat",category:"Dessert",price:16000,tag:"Manisnya pas",description:"Brownies cokelat lembut untuk teman santai.",image:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"},
+  {id:6,name:"Jus Buah Segar",category:"Minuman",price:15000,tag:"Fresh",description:"Minuman buah segar untuk hari yang cerah.",image:"https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=800&q=85"},
+  {id:7,name:"Pizza Margherita",category:"Makanan",price:35000,tag:"Untuk berbagi",description:"Pizza dengan keju mozzarella dan saus tomat.",image:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85"},
+  {id:8,name:"Burger Special",category:"Makanan",price:30000,tag:"Mengenyangkan",description:"Burger juicy dengan sayuran dan saus spesial.",image:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85"},
+  {id:9,name:"Kentang Goreng",category:"Camilan",price:14000,tag:"Teman santai",description:"Kentang goreng renyah dengan taburan bumbu.",image:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85"},
+  {id:10,name:"Ramen Kuah",category:"Makanan",price:32000,tag:"Hangat & lezat",description:"Mi ramen dengan kuah gurih dan topping.",image:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85"},
+  {id:11,name:"Pancake Madu",category:"Dessert",price:23000,tag:"Sweet treat",description:"Pancake lembut dengan madu dan buah segar.",image:"https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=800&q=85"},
+  {id:12,name:"Iced Lemon Tea",category:"Minuman",price:12000,tag:"Menyegarkan",description:"Teh dingin dengan lemon yang menyegarkan.",image:"https://images.unsplash.com/photo-1513558161293-c2027e4a2b5b?auto=format&fit=crop&w=800&q=85"}
 ];
 
 const rupiah = value => new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(value);
@@ -21,6 +27,8 @@ const toast = document.getElementById("toast");
 function renderProducts(){
   const term = document.getElementById("search-input").value.trim().toLowerCase();
   const filtered = products.filter(p => (activeCategory === "Semua" || p.category === activeCategory) && (p.name.toLowerCase().includes(term) || p.description.toLowerCase().includes(term)));
+  const countLabel = document.getElementById("menu-count");
+  if(countLabel) countLabel.textContent = filtered.length + " menu ditemukan";
   if(!filtered.length){grid.innerHTML='<div class="empty-state">Belum ada menu yang cocok. Coba kata kunci lain, ya.</div>';return;}
   grid.innerHTML = filtered.map(p => `
     <article class="product-card">
