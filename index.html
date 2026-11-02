@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DapurKita — temukan makanan dan minuman favoritmu. Pilih menu, masukkan keranjang, lalu pesan dengan mudah.">
+  <meta name="theme-color" content="#fffaf2">
+  <title>DapurKita — Good Food, Happy Mood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="announcement">🍊 Dibuat dengan sepenuh hati — selamat datang di DapurKita!</div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="DapurKita beranda"><span class="brand-mark">dk.</span><span>Dapur<span class="brand-accent">Kita</span><small>GOOD FOOD, HAPPY MOOD</small></span></a>
+    <nav class="desktop-nav"><a href="#beranda">Beranda</a><a href="#menu">Jelajahi Menu</a><a href="#tentang">Tentang Kami</a></nav>
+    <button class="cart-button" id="open-cart" aria-label="Buka keranjang">Keranjang <span id="cart-count">0</span> <span aria-hidden="true">↗</span></button>
+  </header>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> RASA ENAK, HARI MENYENANGKAN</span>
+        <h1>Yang enak-enak,<br><em>ada di sini.</em></h1>
+        <p>Temukan makanan dan minuman favoritmu. Dari camilan ringan sampai hidangan spesial, semua lebih dekat bersama DapurKita.</p>
+        <div class="hero-actions"><a class="primary-button" href="#menu">Jelajahi menu <span>↓</span></a><span class="hero-note">Pilihan lezat untuk setiap momen.</span></div>
+        <div class="hero-stats"><div><strong>Fresh</strong><span>Setiap pilihan</span></div><div><strong>Simple</strong><span>Pesan tanpa ribet</span></div><div><strong>Happy</strong><span>Di setiap gigitan</span></div></div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-image-wrap"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=85" alt="Hidangan sehat penuh warna"><div class="image-sticker">made with<br><b>♥ love</b></div></div>
+        <div class="floating-note"><span>✳</span><div><b>Good food</b><small>Good mood follows.</small></div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="section-heading"><div><span class="eyebrow">PILIHAN DARI DAPUR KAMI</span><h2>Temukan favoritmu<span>.</span></h2></div><p>Scroll, pilih, dan nikmati. Ada sesuatu yang lezat untuk semua orang.</p></div>
+      <div class="shop-toolbar"><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Cari makanan atau minuman..." aria-label="Cari produk"></label><div class="category-list" id="category-list"><button class="category-chip active" data-category="Semua">Semua</button><button class="category-chip" data-category="Makanan">Makanan</button><button class="category-chip" data-category="Camilan">Camilan</button><button class="category-chip" data-category="Minuman">Minuman</button></div></div>
+      <div class="product-grid" id="product-grid" aria-live="polite"></div>
+    </section>
+
+    <section class="promo-band"><div class="promo-icon">✳</div><div><span>GOOD FOOD, GOOD DAY</span><h2>Hari biasa jadi lebih istimewa.</h2><p>Temukan menu yang cocok untuk menemani aktivitasmu hari ini.</p></div><a href="#menu">Lihat pilihan <span>↗</span></a></section>
+
+    <section class="about-section" id="tentang"><div class="about-mark">dk.</div><div><span class="eyebrow">CERITA DAPURKITA</span><h2>Makanan menyatukan<br><em>banyak cerita.</em></h2><p>DapurKita adalah konsep toko online makanan dan minuman yang dirancang agar siapa pun dapat menjelajahi menu dengan mudah. Kami percaya pengalaman membeli makanan harus terasa sederhana, menyenangkan, dan dekat.</p></div><div class="about-aside"><span>01 / OUR PROMISE</span><b>Mudah ditemukan.<br>Mudah dipesan.<br>Selalu menyenangkan.</b></div></section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">dk.</span><span>Dapur<span class="brand-accent">Kita</span><small>GOOD FOOD, HAPPY MOOD</small></span></a><p>© <span id="year"></span> DapurKita. Dibuat untuk pecinta makanan.</p><a href="#beranda">Kembali ke atas ↑</a></footer>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart-panel" id="cart-panel" aria-label="Keranjang belanja" aria-hidden="true">
+    <div class="cart-head"><div><span class="eyebrow">PESANANMU</span><h2>Keranjang <span id="panel-count">(0)</span></h2></div><button class="icon-button" id="close-cart" aria-label="Tutup keranjang">✕</button></div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-bottom"><div class="subtotal"><span>Subtotal</span><strong id="cart-subtotal">Rp0</strong></div><p class="cart-hint">Ongkos kirim dan detail pesanan akan dikonfirmasi oleh penjual.</p><button class="checkout-button" id="checkout-button">Lanjut pesan via WhatsApp ↗</button><small class="checkout-caption">Pesanan akan disiapkan sebagai pesan WhatsApp.</small></div>
+  </aside>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
