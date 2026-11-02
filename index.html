@@ -53,7 +53,26 @@
     <div class="cart-items" id="cart-items"></div>
     <div class="cart-bottom"><div class="subtotal"><span>Subtotal</span><strong id="cart-subtotal">Rp0</strong></div><p class="cart-hint">Ongkos kirim dan detail pesanan akan dikonfirmasi oleh penjual.</p><button class="checkout-button" id="checkout-button">Lanjut pesan via WhatsApp ↗</button><small class="checkout-caption">Pesanan akan disiapkan sebagai pesan WhatsApp.</small></div>
   </aside>
+  <div class="checkout-modal" id="checkout-modal" aria-hidden="true">
+    <div class="checkout-card" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+      <button class="checkout-close" id="checkout-close" aria-label="Tutup">×</button>
+      <span class="eyebrow">SELANGKAH LAGI</span><h2 id="checkout-title">Detail pemesanan</h2>
+      <p class="checkout-intro">Isi data penerima sebelum memilih metode pembayaran.</p>
+      <form id="checkout-form">
+        <label>Nama lengkap<input name="name" required maxlength="50" autocomplete="name" placeholder="Nama penerima"></label>
+        <label>Email<input name="email" type="email" required maxlength="100" autocomplete="email" placeholder="email@contoh.com"></label>
+        <label>Nomor WhatsApp<input name="phone" type="tel" required maxlength="20" autocomplete="tel" placeholder="08xxxxxxxxxx"></label>
+        <label>Alamat pengiriman<textarea name="address" required maxlength="200" rows="3" placeholder="Alamat lengkap penerima"></textarea></label>
+        <div class="checkout-total"><span>Total pesanan</span><strong id="checkout-total">Rp0</strong></div>
+        <button class="checkout-pay-button" id="checkout-pay-button" type="submit">Lanjut ke pembayaran ↗</button>
+        <p class="checkout-error" id="checkout-error" role="alert"></p>
+        <small class="checkout-caption">Pembayaran diproses secara aman melalui Midtrans.</small>
+      </form>
+    </div>
+  </div>
   <div class="toast" id="toast" role="status"></div>
-  <script src="script.js?v=20261102-2"></script>
+  <script src="payment-config.js?v=20261102-3"></script>
+  <script src="script.js?v=20261102-3"></script>
+  <script src="payment-ui.js?v=20261102-3"></script>
 </body>
 </html>
