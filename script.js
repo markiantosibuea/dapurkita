@@ -33,7 +33,7 @@ function renderProducts(){
   grid.innerHTML = filtered.map(p => `
     <article class="product-card">
       <div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/600x450/f1eee8/777?text=DapurKita'"><span class="product-tag">${p.tag}</span></div>
-      <div class="product-info"><div class="product-info-top"><div><h3>${p.name}</h3><p>${p.description}</p></div><span class="product-price">${rupiah(p.price)}</span></div><button class="add-button" data-add="${p.id}">＋ Tambahkan</button></div>
+      <div class="product-info"><div class="product-info-top"><div><h3>${p.name}</h3><p>${p.description}</p></div><span class="product-price">${rupiah(p.price)}</span></div><div class="product-actions"><button class="add-button" data-add="${p.id}">＋ Keranjang</button><button class="buy-button" data-buy="${p.id}">Beli Sekarang ↗</button></div></div>
     </article>`).join("");
 }
 function notify(message){toast.textContent=message;toast.classList.add("show");clearTimeout(notify.timer);notify.timer=setTimeout(()=>toast.classList.remove("show"),2200);}
@@ -51,17 +51,28 @@ function renderCart(){
 }
 function openCart(){cartPanel.classList.add("open");overlay.classList.add("visible");cartPanel.setAttribute("aria-hidden","false");}
 function closeCart(){cartPanel.classList.remove("open");overlay.classList.remove("visible");cartPanel.setAttribute("aria-hidden","true");}
+function openWhatsApp(message){
+  if(!/^\\d{9,15}$/.test(NOMOR_WA_TOKO)){notify("Nomor WhatsApp toko belum diatur.");return;}
+  const url="https://wa.me/"+NOMOR_WA_TOKO+"?text="+encodeURIComponent(message);
+  window.location.assign(url);
+}
+function buyNow(id){
+  const p=products.find(item=>item.id===id);
+  if(!p)return;
+  const message=["Halo DapurKita! Saya ingin membeli produk berikut:","",`• ${p.name} x1 — ${rupiah(p.price)}`,`Total sementara: ${rupiah(p.price)}`,"Mohon konfirmasi ketersediaan dan ongkos kirim. Terima kasih!"].join("\\n");
+  openWhatsApp(message);
+}
 function checkout(){
   if(!cart.length)return;
   if(!/^\d{9,15}$/.test(NOMOR_WA_TOKO)){notify("Nomor WhatsApp toko belum diatur oleh pemilik.");return;}
   const lines=cart.map(x=>{const p=products.find(y=>y.id===x.id);return `• ${p.name} x${x.qty} — ${rupiah(p.price*x.qty)}`;});
   const total=cart.reduce((n,x)=>n+products.find(p=>p.id===x.id).price*x.qty,0);
   const message=["Halo DapurKita! Saya ingin memesan:","",...lines,"",`Total sementara: ${rupiah(total)}`,"Mohon info ketersediaan dan ongkos kirim. Terima kasih!"].join("\n");
-  window.open("https://wa.me/"+NOMOR_WA_TOKO+"?text="+encodeURIComponent(message),"_blank","noopener,noreferrer");
+  openWhatsApp(message);
 }
 document.getElementById("category-list").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;activeCategory=b.dataset.category;document.querySelectorAll(".category-chip").forEach(x=>x.classList.toggle("active",x===b));renderProducts();});
 document.getElementById("search-input").addEventListener("input",renderProducts);
-grid.addEventListener("click",e=>{const b=e.target.closest("[data-add]");if(b)addToCart(Number(b.dataset.add));});
+grid.addEventListener("click",e=>{const buy=e.target.closest("[data-buy]");const add=e.target.closest("[data-add]");if(buy){buyNow(Number(buy.dataset.buy));return;}if(add)addToCart(Number(add.dataset.add));});
 document.getElementById("cart-items").addEventListener("click",e=>{const q=e.target.closest("[data-qty]");const r=e.target.closest("[data-remove]");if(q)changeQty(Number(q.dataset.qty),Number(q.dataset.delta));if(r)changeQty(Number(r.dataset.remove),-999);});
 document.getElementById("open-cart").addEventListener("click",openCart);
 document.getElementById("close-cart").addEventListener("click",closeCart);
