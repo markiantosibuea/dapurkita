@@ -67,6 +67,39 @@ serve(async (req) => {
       console.error("Midtrans create transaction failed", result);
       return json({ error: "Pembayaran belum dapat dibuat. Silakan coba kembali." }, 502);
     }
+    // Kirim notifikasi pesanan baru ke email pemilik. Kegagalan email tidak membatalkan transaksi.
+    const emailKey = Deno.env.get("RESEND_API_KEY");
+    const ownerEmail = Deno.env.get("ORDER_NOTIFICATION_EMAIL");
+    if (emailKey && ownerEmail) {
+      const orderLines = normalized.map((item) => `- ${item.name} x${item.quantity}: Rp${(item.price * item.quantity).toLocaleString("id-ID")}`).join("\\n");
+      const emailText = [
+        "Ada pesanan baru di DapurKita yang menunggu pembayaran.",
+        "",
+        `Order ID: ${orderId}`,
+        `Nama: ${String(customer.name)}`,
+        `Email pembeli: ${String(customer.email)}`,
+        `WhatsApp: ${String(customer.phone)}`,
+        `Alamat: ${String(customer.address)}`,
+        "",
+        "Rincian:",
+        orderLines,
+        "",
+        `Total: Rp${total.toLocaleString("id-ID")}`,
+        "",
+        "Status: Menunggu pembayaran. Status akhir akan dikirim melalui notifikasi Midtrans."
+      ].join("\\n");
+      const mail = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${emailKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          from: Deno.env.get("RESEND_FROM_EMAIL") || "DapurKita <onboarding@resend.dev>",
+          to: [ownerEmail],
+          subject: `Pesanan baru ${orderId} — menunggu pembayaran`,
+          text: emailText
+        }),
+      });
+      if (!mail.ok) console.error("Order email failed", await mail.text());
+    }
     return json({ order_id: orderId, token: result.token, redirect_url: result.redirect_url, amount: total });
   } catch (error) {
     console.error(error);
